@@ -4,24 +4,11 @@ import java.util.Date;
 
 public class UserDTO {
 
-    private int id;
     private String name;
     private Date dateOfBirth;
     private String countryOfResidence;
     private String citizenship;
 
-    private String login;
-    private String password;
-
-    public UserDTO(int id, String name, Date dateOfBirth, String countryOfResidence, String citizenship, String login, String password) {
-        this.id = id;
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.countryOfResidence = countryOfResidence;
-        this.citizenship = citizenship;
-        this.login = login;
-        this.password = password;
-    }
 
     public int getId() {
         return id;
