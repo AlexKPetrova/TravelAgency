@@ -1,21 +1,23 @@
 package DTO;
 
-import java.util.Date;
 
 public class UserDTO {
 
     private String name;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String countryOfResidence;
     private String citizenship;
 
+    private String login;
+    private String password;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public UserDTO(String name, String dateOfBirth, String countryOfResidence, String citizenship, String login, String password) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.countryOfResidence = countryOfResidence;
+        this.citizenship = citizenship;
+        this.login = login;
+        this.password = password;
     }
 
     public String getName() {
@@ -26,11 +28,11 @@ public class UserDTO {
         this.name = name;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

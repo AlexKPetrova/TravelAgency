@@ -1,12 +1,10 @@
 package models;
 
-import java.util.Date;
-
 public class User {
 
     private int id;
     private String name;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String countryOfResidence;
     private String citizenship;
 
@@ -14,9 +12,18 @@ public class User {
     private String password;
 
 
-    public User(int id, String name, Date dateOfBirth, String countryOfResidence,
+    public User(int id, String name, String dateOfBirth, String countryOfResidence,
                 String citizenship, String login, String password) {
         this.id = id;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.countryOfResidence = countryOfResidence;
+        this.citizenship = citizenship;
+        this.login = login;
+        this.password = password;
+    }
+
+    public User(String name, String dateOfBirth, String countryOfResidence, String citizenship, String login, String password) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.countryOfResidence = countryOfResidence;
@@ -41,11 +48,11 @@ public class User {
         this.name = name;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
