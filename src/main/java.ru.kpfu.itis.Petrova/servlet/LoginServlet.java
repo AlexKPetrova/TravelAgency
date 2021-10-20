@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
             req.getServletContext().getRequestDispatcher("/").forward(req, resp);
         } else {
             // путь до главной, где авторизация
-            resp.sendRedirect("/");
+            resp.sendRedirect("authorization.html");
         }
     }
 }
