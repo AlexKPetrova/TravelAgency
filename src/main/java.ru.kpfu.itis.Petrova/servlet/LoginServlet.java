@@ -28,14 +28,14 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        if (userService.isLogin(login,password)) {
+        int hashCodePass = password.hashCode();
+
+        if (userService.isLogin(login,hashCodePass)) {
             HttpSession session = req.getSession();
             session.setAttribute("username", login);
-
             // путь до главной странички - страничи пользователя
             req.getServletContext().getRequestDispatcher("/").forward(req, resp);
         } else {
-            // путь до главной, где авторизация
             resp.sendRedirect("authorization.html");
         }
     }

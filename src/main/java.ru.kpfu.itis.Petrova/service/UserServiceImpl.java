@@ -2,12 +2,13 @@ package service;
 
 import models.User;
 import repositories.UserRepository;
+import repositories.UserRepositoryImpl;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository = new UserRepositoryImpl();
 
     @Override
     public User find(Integer id) {
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isLogin(String login, String password) {
+    public boolean isLogin(String login, int password) {
         return userRepository.isLogin(login,password);
     }
 }

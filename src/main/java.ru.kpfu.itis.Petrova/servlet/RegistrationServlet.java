@@ -31,8 +31,10 @@ public class RegistrationServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        User user = new User(name, dateOfBirth, countryOfResidence, citizenship, login, password);
-        userService.save(user);
+
+        // вызвать метод преобразования названия страны в ид страны
+        //User user = new User(name, dateOfBirth, countryOfResidence, citizenship, login, password);
+        //userService.save(user);
 
         doGet(req, resp);
         // путь до профиля файл с версткой

@@ -14,6 +14,6 @@ public interface UserRepository {
 
     void update(User user);
 
-    boolean isLogin(String login, String password);
+    boolean isLogin(String login, int password);
 
 }

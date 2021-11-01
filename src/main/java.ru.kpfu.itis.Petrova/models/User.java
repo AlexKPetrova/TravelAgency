@@ -5,15 +5,15 @@ public class User {
     private int id;
     private String name;
     private String dateOfBirth;
-    private String countryOfResidence;
-    private String citizenship;
+    private int countryOfResidence;
+    private int citizenship;
 
     private String login;
-    private String password;
+    private int password;
 
 
-    public User(int id, String name, String dateOfBirth, String countryOfResidence,
-                String citizenship, String login, String password) {
+    public User(int id, String name, String dateOfBirth, int countryOfResidence,
+                int citizenship, String login, int password) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -23,7 +23,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String name, String dateOfBirth, String countryOfResidence, String citizenship, String login, String password) {
+    public User(String name, String dateOfBirth, int countryOfResidence, int citizenship, String login, int password) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.countryOfResidence = countryOfResidence;
@@ -56,19 +56,19 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getCountryOfResidence() {
+    public int getCountryOfResidence() {
         return countryOfResidence;
     }
 
-    public void setCountryOfResidence(String countryOfResidence) {
+    public void setCountryOfResidence(int countryOfResidence) {
         this.countryOfResidence = countryOfResidence;
     }
 
-    public String getCitizenship() {
+    public int getCitizenship() {
         return citizenship;
     }
 
-    public void setCitizenship(String citizenship) {
+    public void setCitizenship(int citizenship) {
         this.citizenship = citizenship;
     }
 
@@ -80,11 +80,11 @@ public class User {
         this.login = login;
     }
 
-    public String getPassword() {
+    public int getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(int password) {
         this.password = password;
     }
 }
