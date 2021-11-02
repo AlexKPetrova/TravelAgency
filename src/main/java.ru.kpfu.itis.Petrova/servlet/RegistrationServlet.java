@@ -1,6 +1,9 @@
 package servlet;
 
+import models.Country;
 import models.User;
+import service.CountryService;
+import service.CountryServiceImpl;
 import service.UserService;
 import service.UserServiceImpl;
 
@@ -15,11 +18,12 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
 
     private final UserService userService = new UserServiceImpl();
+    private final CountryService countryService = new CountryServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // путь до файла с регистрацией, начальный, как у входа
-        req.getServletContext().getRequestDispatcher("").forward(req, resp);
+        resp.sendRedirect("registration.html");
     }
 
     @Override
@@ -31,13 +35,23 @@ public class RegistrationServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
+        String hashPassword = PasswordHelper.encrypt(password);
 
-        // вызвать метод преобразования названия страны в ид страны
-        //User user = new User(name, dateOfBirth, countryOfResidence, citizenship, login, password);
-        //userService.save(user);
+        //пользователь вводит название страны и гражданство, а в бд будет id этой страны
+       // Integer countryOfResidenceId = notNull(countryOfResidence);
+        //Integer citizenshipId = notNull(citizenship);
 
-        doGet(req, resp);
-        // путь до профиля файл с версткой
-        req.getServletContext().getRequestDispatcher("").forward(req, resp);
+        User user = new User(name, dateOfBirth, 1, 1, login, hashPassword);
+        userService.save(user);
+        resp.sendRedirect("/persAcc");
+    }
+
+    public Integer notNull(String country){
+        if(countryService.findIdByName(country) != null){
+             return countryService.findIdByName(country);
+        }else{
+            countryService.save(new Country(country));
+            return countryService.findIdByName(country);
+        }
     }
 }

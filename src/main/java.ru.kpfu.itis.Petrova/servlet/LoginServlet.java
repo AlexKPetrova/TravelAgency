@@ -5,38 +5,51 @@ import service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 
 @WebServlet(name = "loginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 
-   private final UserService userService = new UserServiceImpl();
+    private final UserService userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.sendRedirect("authorization.html");
+        resp.sendRedirect("authorization.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String login = req.getParameter("login");
+        String login = req.getParameter("username");
         String password = req.getParameter("password");
+        String remember = req.getParameter("remember");
 
-        int hashCodePass = password.hashCode();
+        String hashPassword = PasswordHelper.encrypt(password);
 
-        if (userService.isLogin(login,hashCodePass)) {
+
+        if (userService.isLogin(login,hashPassword)) {
             HttpSession session = req.getSession();
             session.setAttribute("username", login);
-            // путь до главной странички - страничи пользователя
-            req.getServletContext().getRequestDispatcher("/").forward(req, resp);
+
+            session.setMaxInactiveInterval(60 * 60);
+
+            Cookie loginCookie = new Cookie("userLogin", login);
+            Cookie passCookie = new Cookie("userPassword", password);
+            Cookie rememberCookie = new Cookie("userRemember", remember);
+
+            loginCookie.setMaxAge(24 * 60 * 60);
+            passCookie.setMaxAge(24*60*60);
+            rememberCookie.setMaxAge(24*60*60);
+
+            resp.addCookie(loginCookie);
+            resp.addCookie(passCookie);
+            resp.addCookie(rememberCookie);
+
+            resp.sendRedirect("/persAcc");
         } else {
-            resp.sendRedirect("authorization.html");
+            resp.sendRedirect("/login");
         }
     }
 }

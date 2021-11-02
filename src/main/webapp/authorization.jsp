@@ -1,15 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Authorization</title>
     <link
-            href="css/styleAuth.css"
+            href="styleAuth.css"
             rel="stylesheet"
             type="text/css"
     >
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
 </head>
+
 <body>
 
 
@@ -17,7 +17,23 @@
     <div class="user-icon"></div>
     <div class="pass-icon"></div>
 
-    <form name="login-form" class="login-form" action="" method="post">
+    <%
+        String username = "", password = "", remember = "";
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("userEmail")) {
+                    username = cookie.getValue();
+                } else if (cookie.getName().equals("userPassword")) {
+                    password = cookie.getValue();
+                } else if (cookie.getName().equals("userRemember")) {
+                    remember = cookie.getValue();
+                }
+            }
+        }
+    %>
+
+    <form name="login-form" class="login-form" action="/login" method="post">
 
         <div class="header">
             <h1>Авторизация</h1>
@@ -29,6 +45,11 @@
             <input name="password" type="password" class="input password" value="Пароль" onfocus="this.value=''" />
         </div>
 
+        <div class="rememb">
+            <span>Запомнить:</span> <input type="checkbox" name="remember" value="1"
+            <%="1".equals(remember) ? "checked='/checked'" : "" %>
+        </div>
+
         <div class="footer">
             <input type="submit" name="submit" value="ВОЙТИ" class="button" />
             <input type="submit" name="submit" value="Регистрация" class="register" />
@@ -36,7 +57,6 @@
 
     </form>
 </div>
-<div class="gradient"></div>
 
 <script type="text/javascript">
     $(document).ready(function() {

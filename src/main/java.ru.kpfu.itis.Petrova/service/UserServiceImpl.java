@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository = new UserRepositoryImpl();
+    private static UserRepository userRepository = new UserRepositoryImpl();
 
     @Override
     public User find(Integer id) {
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isLogin(String login, int password) {
+    public boolean isLogin(String login, String password) {
         return userRepository.isLogin(login,password);
     }
 }

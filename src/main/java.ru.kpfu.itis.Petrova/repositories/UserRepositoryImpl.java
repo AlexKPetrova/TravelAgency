@@ -9,57 +9,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserRepositoryImpl.class);
 
     private final Connection connection = PostgresConnectionHelper.getConnection();
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserRepositoryImpl.class);
+
 
     @Override
     public User find(Integer id) {
         try {
-            Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM human";
-            ResultSet resultSet = statement.executeQuery(sql);
+            String sql = "SELECT * FROM human WHERE id = " + id;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()){
-                if (resultSet.getInt("id") == id){
-                    return new User(
-                            resultSet.getInt("id"),
-                            resultSet.getString("name"),
-                            resultSet.getString("dateOfBirth"),
-                            resultSet.getInt("countryOfResidence"),
-                            resultSet.getInt("citizenship"),
-                            resultSet.getString("login"),
-                            resultSet.getInt("password")
-                    );
-                }
+            if (resultSet.next()) {
+                return new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("dateOfBirth"),
+                        resultSet.getInt("country_Of_Residence_id"),
+                        resultSet.getInt("citizenship_id"),
+                        resultSet.getString("login"),
+                        resultSet.getString("password")
+                );
             }
 
         } catch (SQLException throwables) {
             LOGGER.warn("The user was not found", throwables);
         }
-
         return null;
     }
 
     @Override
     public List<User> findAll() {
-        try{
+        try {
             Statement statement = connection.createStatement();
             String sql = "SELECT * FROM human";
             ResultSet resultSet = statement.executeQuery(sql);
 
             List<User> userList = new ArrayList<>();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 User user = new User(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("dateOfBirth"),
-                        resultSet.getInt("countryOfResidence"),
-                        resultSet.getInt("citizenship"),
+                        resultSet.getInt("country_Of_Residence_id"),
+                        resultSet.getInt("citizenship_id"),
                         resultSet.getString("login"),
-                        resultSet.getInt("password")
+                        resultSet.getString("password")
                 );
                 userList.add(user);
             }
@@ -75,14 +74,14 @@ public class UserRepositoryImpl implements UserRepository{
 
         String sql = "INSERT INTO human (name, dateOfBirth, country_Of_Residence_id, citizenship_id, login, password) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try{
+        try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getDateOfBirth());
-            preparedStatement.setInt(3, user.getCountryOfResidence());
-            preparedStatement.setInt(4, user.getCitizenship());
+            preparedStatement.setInt(3, user.getCountryOfResidenceId());
+            preparedStatement.setInt(4, user.getCitizenshipId());
             preparedStatement.setString(5, user.getLogin());
-            preparedStatement.setInt(6, user.getPassword());
+            preparedStatement.setString(6, user.getPassword());
             preparedStatement.executeUpdate();
         } catch (SQLException throwable) {
             LOGGER.warn("Failed to save new user", throwable);
@@ -92,31 +91,45 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public void update(User user) {
-        //executeUpdate()
+        if (find(user.getId()) != null) {
+            String sql = "UPDATE human  SET (id, name, dateOfBirth, country_Of_Residence_id, citizenship_id, login, password) VALUES (?, ?, ?, ?, ?, ?)";
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, user.getName());
+                preparedStatement.setString(2, user.getDateOfBirth());
+                preparedStatement.setInt(3, user.getCountryOfResidenceId());
+                preparedStatement.setInt(4, user.getCitizenshipId());
+                preparedStatement.setString(5, user.getLogin());
+                preparedStatement.setString(6, user.getPassword());
+                preparedStatement.executeUpdate();
+            } catch (SQLException throwable) {
+                LOGGER.warn("Failed to save new user", throwable);
+            }
+        } else {
+            save(user);
+        }
     }
 
     @Override
-    public boolean isLogin(String login, int password) {
-        if(findByLogin(login) == password){
-            return true;
-        }
-        return false;
+    public boolean isLogin(String login, String password) {
+        return findPasswordByLogin(login).equals(password);
     }
 
-    public int findByLogin(String login){
+    public String findPasswordByLogin(String login) {
         try {
-            Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM human";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while(resultSet.next()){
-                if(resultSet.getString("login").equals(login)){
-                    return resultSet.getInt("password");
-                }
+
+            String sql = "SELECT password FROM human WHERE login = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString("password");
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
-        return 1;
+        return null;
     }
 }

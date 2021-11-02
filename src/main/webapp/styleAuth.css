@@ -19,12 +19,12 @@ BODY STYLING
 }
 
 body {
-	background: url(/css/images/bg.png) repeat;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	font-weight:300;
-	text-align: left;
-	text-decoration: none;
+	background: #56c2e1;
+	position: absolute;
+	width: 100%;
+	height: 100%;
 }
+
 
 #wrapper {
 	/* Center wrapper perfectly */
@@ -37,28 +37,6 @@ body {
 	margin-top: -200px;
 }
 
-
-.gradient {
-	/* Center Positioning */
-	width: 600px;
-	height: 600px;
-	position: fixed;
-	left: 50%;
-	top: 50%;
-	margin-left: -300px;
-	margin-top: -300px;
-	
-	/* Fallback */ 
-	background-image: url(/css/images/gradient.png);
-	background-repeat: no-repeat; 
-	
-	/* CSS3 Gradient */
-	background-image: -webkit-gradient(radial, 0% 0%, 0% 100%, from(rgba(213,246,255,1)), to(rgba(213,246,255,0)));
-	background-image: -webkit-radial-gradient(50% 50%, 40% 40%, rgba(213,246,255,1), rgba(213,246,255,0));
-	background-image: -moz-radial-gradient(50% 50%, 50% 50%, rgba(213,246,255,1), rgba(213,246,255,0));
-	background-image: -ms-radial-gradient(50% 50%, 50% 50%, rgba(213,246,255,1), rgba(213,246,255,0));
-	background-image: -o-radial-gradient(50% 50%, 50% 50%, rgba(213,246,255,1), rgba(213,246,255,0));
-}
 
 /*******************
 LOGIN FORM
@@ -184,6 +162,10 @@ CONTENT
 	-o-transition: all 0.5s;
 	-ms-transition: all 0.5s;
 	outline:none;
+}
+
+.login-form .rememb span{
+	font-family: 'Bree Serif', serif;
 }
 
 /*******************

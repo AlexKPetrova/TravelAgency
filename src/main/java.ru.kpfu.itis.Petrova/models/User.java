@@ -5,29 +5,29 @@ public class User {
     private int id;
     private String name;
     private String dateOfBirth;
-    private int countryOfResidence;
-    private int citizenship;
+    private int countryOfResidenceId;
+    private int citizenshipId;
 
     private String login;
-    private int password;
+    private String password;
 
 
     public User(int id, String name, String dateOfBirth, int countryOfResidence,
-                int citizenship, String login, int password) {
+                int citizenship, String login, String password) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.countryOfResidence = countryOfResidence;
-        this.citizenship = citizenship;
+        this.countryOfResidenceId = countryOfResidence;
+        this.citizenshipId = citizenship;
         this.login = login;
         this.password = password;
     }
 
-    public User(String name, String dateOfBirth, int countryOfResidence, int citizenship, String login, int password) {
+    public User(String name, String dateOfBirth, int countryOfResidence, int citizenship, String login, String password) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.countryOfResidence = countryOfResidence;
-        this.citizenship = citizenship;
+        this.countryOfResidenceId = countryOfResidence;
+        this.citizenshipId = citizenship;
         this.login = login;
         this.password = password;
     }
@@ -56,20 +56,20 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getCountryOfResidence() {
-        return countryOfResidence;
+    public int getCountryOfResidenceId() {
+        return countryOfResidenceId;
     }
 
-    public void setCountryOfResidence(int countryOfResidence) {
-        this.countryOfResidence = countryOfResidence;
+    public void setCountryOfResidenceId(int countryOfResidenceId) {
+        this.countryOfResidenceId = countryOfResidenceId;
     }
 
-    public int getCitizenship() {
-        return citizenship;
+    public int getCitizenshipId() {
+        return citizenshipId;
     }
 
-    public void setCitizenship(int citizenship) {
-        this.citizenship = citizenship;
+    public void setCitizenshipId(int citizenshipId) {
+        this.citizenshipId = citizenshipId;
     }
 
     public String getLogin() {
@@ -80,12 +80,25 @@ public class User {
         this.login = login;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", countryOfResidenceId=" + countryOfResidenceId +
+                ", citizenshipId=" + citizenshipId +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
 
