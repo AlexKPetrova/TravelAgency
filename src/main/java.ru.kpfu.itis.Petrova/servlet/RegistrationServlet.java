@@ -36,17 +36,7 @@ public class RegistrationServlet extends HttpServlet {
 
         User user = new User(1, 1, login, hashPassword);
         userService.save(user);
-        resp.sendRedirect("/persAcc");
+        resp.sendRedirect("/login");
     }
 
-    public Integer notNull(String country){
-//        Integer countryOfResidenceId = notNull(countryOfResidence);
-//        Integer citizenshipId = notNull(citizenship);
-        if(countryService.findIdByName(country) != null){
-             return countryService.findIdByName(country);
-        }else{
-            countryService.save(new Country(country));
-            return countryService.findIdByName(country);
-        }
-    }
 }

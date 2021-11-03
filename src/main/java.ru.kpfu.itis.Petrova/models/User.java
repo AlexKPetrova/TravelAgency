@@ -39,6 +39,13 @@ public class User {
         this.password = password;
     }
 
+    public User(String name, String dateOfBirth, int countryOfResidenceId, int citizenshipId) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.countryOfResidenceId = countryOfResidenceId;
+        this.citizenshipId = citizenshipId;
+    }
+
     public int getId() {
         return id;
     }

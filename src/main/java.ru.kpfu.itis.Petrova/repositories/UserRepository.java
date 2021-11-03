@@ -16,4 +16,6 @@ public interface UserRepository {
 
     boolean isLogin(String login, String password);
 
+    public String findPasswordByLogin(String login);
+
 }

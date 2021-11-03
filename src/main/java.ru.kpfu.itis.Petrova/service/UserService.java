@@ -15,4 +15,6 @@ public interface UserService {
     void update(User user);
 
     boolean isLogin(String login, String password);
+
+    public String findPasswordByLogin(String login);
 }

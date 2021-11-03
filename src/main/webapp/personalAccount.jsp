@@ -18,12 +18,21 @@
 </head>
 <body>
 
-<form name="persAcc" class="persAcc" action="/dateUpdate" method="get">
-    <div class="footer">
-        <input type="submit" name="submit" value="ВОЙТИ" class="button" />
+<div id="wrapper">
 
-    </div>
-</form>
+    <form name="persAcc" class="persAcc" action="/dateUpdate" method="get">
+        <div class="update">
+            <input type="submit" name="submit" value="Добавить данные о себе" class="button" />
+        </div>
+    </form>
+
+    <form name="persAcc2" class="persAcc" action="/reservation" method="get">
+        <div class="reservation">
+            <input type="submit" name="submit" value="Забронировать поездку" class="button" />
+        </div>
+    </form>
+</div>
+
 
 
 </body>

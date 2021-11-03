@@ -29,7 +29,7 @@ public class CountryRepositoryImpl implements CountryRepository{
             }
 
         } catch (SQLException throwables) {
-            LOGGER.warn("The user was not found", throwables);
+            LOGGER.warn("The country was not found", throwables);
         }
         return null;
     }
