@@ -28,25 +28,20 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
-        String dateOfBirth = req.getParameter("dateOfBirth");
-        String countryOfResidence = req.getParameter("countryOfResidence");
-        String citizenship = req.getParameter("citizenship");
+
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
         String hashPassword = PasswordHelper.encrypt(password);
 
-        //пользователь вводит название страны и гражданство, а в бд будет id этой страны
-       // Integer countryOfResidenceId = notNull(countryOfResidence);
-        //Integer citizenshipId = notNull(citizenship);
-
-        User user = new User(name, dateOfBirth, 1, 1, login, hashPassword);
+        User user = new User(1, 1, login, hashPassword);
         userService.save(user);
         resp.sendRedirect("/persAcc");
     }
 
     public Integer notNull(String country){
+//        Integer countryOfResidenceId = notNull(countryOfResidence);
+//        Integer citizenshipId = notNull(citizenship);
         if(countryService.findIdByName(country) != null){
              return countryService.findIdByName(country);
         }else{

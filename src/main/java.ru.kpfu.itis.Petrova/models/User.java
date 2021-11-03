@@ -32,6 +32,13 @@ public class User {
         this.password = password;
     }
 
+    public User(int countryOfResidenceId, int citizenshipId, String login, String password) {
+        this.countryOfResidenceId = countryOfResidenceId;
+        this.citizenshipId = citizenshipId;
+        this.login = login;
+        this.password = password;
+    }
+
     public int getId() {
         return id;
     }

@@ -22,6 +22,7 @@ $('.next-button.email').click(
   }
 );
 
+
 $('.password').on("change keyup paste",
   function(){
     if($(this).val()){

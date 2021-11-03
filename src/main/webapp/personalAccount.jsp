@@ -9,8 +9,22 @@
 <html>
 <head>
     <title>Personal Account</title>
+
+    <link
+            href="stylePersAcc.css"
+            rel="stylesheet"
+            type="text/css"
+    >
 </head>
 <body>
-<h1> личный кабинет</h1>
+
+<form name="persAcc" class="persAcc" action="/dateUpdate" method="get">
+    <div class="footer">
+        <input type="submit" name="submit" value="ВОЙТИ" class="button" />
+
+    </div>
+</form>
+
+
 </body>
 </html>

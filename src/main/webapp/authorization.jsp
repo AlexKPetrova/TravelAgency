@@ -46,13 +46,12 @@
         </div>
 
         <div class="rememb">
-            <span>Запомнить:</span> <input type="checkbox" name="remember" value="1"
             <%="1".equals(remember) ? "checked='/checked'" : "" %>
         </div>
 
         <div class="footer">
             <input type="submit" name="submit" value="ВОЙТИ" class="button" />
-            <input type="submit" name="submit" value="Регистрация" class="register" />
+            <a href="/registration" class="register" >Регистрация</a>
         </div>
 
     </form>
