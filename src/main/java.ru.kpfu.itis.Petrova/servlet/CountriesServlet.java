@@ -11,37 +11,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "CountriesServlet", urlPatterns = "/countries")
+@WebServlet(name = "CountriesServlet", urlPatterns = "/country")
 public class CountriesServlet extends HttpServlet {
 
-
-    private final UserService userService = new UserServiceImpl();
     private final CountryService countryService = new CountryServiceImpl();
     private final ClientService clientService = new ClientServiceImpl();
+    private final UserService userService = new UserServiceImpl();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Country> countryList = countryService.findAll();
-        //todo как передать лист на фронт?
-        //меню с выбором стран ( они вытаскиваются из бд)
-        resp.sendRedirect("");
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        String countryReservation = req.getParameter("countryReservation");
-        String id = req.getParameter("id");
-        Integer idInt = (new Integer(id));
+        String country = req.getParameter("country");
+        String login = req.getParameter("login");
+        Integer idByLogin = userService.findIdByLogin(login);
 
-        if(clientService.findByHumanId(idInt) == null){
-            Integer countryId = countryService.findIdByName(countryReservation);
-            clientService.save(new Client(idInt,countryId));
+        if(clientService.findByHumanId(idByLogin) == null){
+            Integer countryId = countryService.findIdByName(country);
+            clientService.save(new Client( idByLogin, countryId, 1));
         }
         try {
-            req.getRequestDispatcher("/tours").forward(req, resp);
+            req.getRequestDispatcher("Final.html").forward(req, resp);
         } catch (ServletException e) {
             e.printStackTrace();
         }

@@ -17,4 +17,6 @@ public interface UserService {
     boolean isLogin(String login, String password);
 
     public String findPasswordByLogin(String login);
+
+    Integer findIdByLogin(String login);
 }

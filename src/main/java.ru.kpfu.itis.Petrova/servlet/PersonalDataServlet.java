@@ -25,12 +25,14 @@ public class PersonalDataServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //страничка с полями для ввода личной информации
-        resp.sendRedirect("");
+        resp.sendRedirect("UpdateDate.html");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        String login = req.getParameter("login");
+        Integer idByLogin = userService.findIdByLogin(login);
         String name = req.getParameter("name");
         String dateOfBirth = req.getParameter("dateOfBirth");
         String countryOfResidence = req.getParameter("countryOfResidence");
@@ -41,19 +43,18 @@ public class PersonalDataServlet extends HttpServlet {
         Integer countryOfResidenceId = notNull(countryOfResidence);
         Integer citizenshipId = notNull(citizenship);
 
-        User user = new User(name,dateOfBirth,countryOfResidenceId,citizenshipId);
-        userService.save(user);
-        resp.sendRedirect("/persAcc");
+        User user = new User(idByLogin, name,dateOfBirth,countryOfResidenceId,citizenshipId);
+        userService.update(user);
+        resp.sendRedirect("basic.html");
     }
 
     public Integer notNull(String country){
 
-        if(countryService.findIdByName(country) != null){
-            return countryService.findIdByName(country);
-        }else{
+        if (countryService.findIdByName(country) == null) {
             countryService.save(new Country(country));
-            return countryService.findIdByName(country);
         }
+        return countryService.findIdByName(country);
     }
+
 
 }

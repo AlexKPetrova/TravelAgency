@@ -1,0 +1,90 @@
+ .u-section-1 {
+  background-image: url("images/France_Houses_Paris_Eiffel_Tower_Megapolis_523825_4070x2890.jpg");
+}
+
+.u-section-1 .u-sheet-1 {
+  min-height: 674px;
+  margin-bottom: 0;
+}
+
+.u-section-1 .u-gallery-1 {
+  height: 468px;
+  margin-bottom: 0;
+  margin-top: 80px;
+}
+
+.u-section-1 .u-carousel-indicators-1 {
+  position: absolute;
+  top: auto;
+  bottom: 27px;
+}
+
+.u-section-1 .u-carousel-item-1 {
+  margin-right: 0;
+}
+
+.u-section-1 .u-over-slide-1 {
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+  padding: 20px;
+}
+
+.u-section-1 .u-carousel-item-2 {
+  margin-right: 0;
+}
+
+.u-section-1 .u-over-slide-2 {
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+  padding: 20px;
+}
+
+.u-section-1 .u-carousel-control-1 {
+  position: absolute;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.u-section-1 .u-carousel-control-2 {
+  position: absolute;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 556px;
+  }
+
+  .u-section-1 .u-gallery-1 {
+    height: 405px;
+    margin-bottom: 60px;
+    margin-top: 60px;
+  }
+
+  .u-section-1 .u-over-slide-1 {
+    padding: 59px;
+  }
+
+  .u-section-1 .u-over-slide-2 {
+    padding: 59px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 426px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 201px;
+  }
+}

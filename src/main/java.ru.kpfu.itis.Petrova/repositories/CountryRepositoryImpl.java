@@ -64,10 +64,10 @@ public class CountryRepositoryImpl implements CountryRepository{
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, country.getCountryName());
+            preparedStatement.setString(1, country.getCountryName().toLowerCase());
             preparedStatement.executeUpdate();
         } catch (SQLException throwable) {
-            LOGGER.warn("Failed to save new user", throwable);
+            LOGGER.warn("Failed to save new country", throwable);
         }
 
     }
@@ -79,11 +79,12 @@ public class CountryRepositoryImpl implements CountryRepository{
 
     public Integer findIdByName(String name){
         try {
-            String sql = "SELECT country_name FROM country WHERE country_name = " + name;
+            String sql = "SELECT id FROM country WHERE country_name = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, name.toLowerCase());
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 return resultSet.getInt("id");
             }
 

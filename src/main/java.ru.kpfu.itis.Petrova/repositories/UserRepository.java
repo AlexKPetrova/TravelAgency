@@ -18,4 +18,6 @@ public interface UserRepository {
 
     public String findPasswordByLogin(String login);
 
+    public Integer findIdByLogin(String login);
+
 }

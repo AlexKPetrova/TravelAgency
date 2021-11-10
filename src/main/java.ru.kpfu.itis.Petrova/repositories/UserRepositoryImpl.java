@@ -19,8 +19,9 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User find(Integer id) {
         try {
-            String sql = "SELECT * FROM human WHERE id = " + id;
+            String sql = "SELECT * FROM human WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -92,15 +93,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void update(User user) {
         if (find(user.getId()) != null) {
-            String sql = "UPDATE human  SET (id, name, dateOfBirth, country_Of_Residence_id, citizenship_id, login, password) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "UPDATE human SET  name = ?, dateOfBirth = ?, country_Of_Residence_id = ?, citizenship_id = ? WHERE id = " + user.getId();
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, user.getName());
                 preparedStatement.setString(2, user.getDateOfBirth());
                 preparedStatement.setInt(3, user.getCountryOfResidenceId());
                 preparedStatement.setInt(4, user.getCitizenshipId());
-                preparedStatement.setString(5, user.getLogin());
-                preparedStatement.setString(6, user.getPassword());
                 preparedStatement.executeUpdate();
             } catch (SQLException throwable) {
                 LOGGER.warn("Failed to save new user", throwable);
@@ -125,6 +124,26 @@ public class UserRepositoryImpl implements UserRepository {
 
             if (resultSet.next()) {
                 return resultSet.getString("password");
+            }
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return null;
+    }
+
+    public Integer findIdByLogin(String login){
+        try {
+
+            String sql = "SELECT id FROM human WHERE login = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+
+                return resultSet.getInt("id");
             }
 
         } catch (SQLException throwable) {
